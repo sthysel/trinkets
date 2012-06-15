@@ -6,7 +6,6 @@
 # │   ├── jdk1.6.0_23
 # │   └── jdk1.7.0_04
 
-
 # Exit codes
 E_NOTROOT=87 # Non-root exit error.
 E_WRONG_ARGS=85  # Wrong arguments
@@ -140,16 +139,19 @@ makeDirectories() {
 
 setEnvironment() {
     ENVFILE=/etc/profile.d/java_environment.sh
+    BASHRC=/etc/bash.bashrc
     echo "Setting up Environment Variables. Adding profile to ${ENVFILE}"
     echo "export JAVA_HOME=${JAVA_HOME_DIR}" > ${ENVFILE}
     echo "export PATH=JAVA_HOME/bin:$PATH" >> ${ENVFILE}
     chmod a+x ${ENVFILE}
 
     BASH_RC_ENTRY=". ${ENVFILE}"
-    grep ${BASH_RC_ENTRY} /etc/bash.bashrc > /dev/null
-    if [[ $? -ne 0 ]]
+    if ! [[ $(grep "${BASH_RC_ENTRY}" ${BASHRC}) ]]
         then
-            echo ${BASH_RC_ENTRY} >> "/etc/bash.bashrc"
+	    echo "Adding ${BASH_RC_ENTRY} to ${BASHRC}"
+	    echo "" >> ${BASHRC}
+	    echo "# Added by $0 at $(date)" >> ${BASHRC}
+            echo "${BASH_RC_ENTRY}" >> ${BASHRC}
     fi
 }
 
