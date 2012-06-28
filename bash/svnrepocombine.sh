@@ -26,10 +26,10 @@ declare -A REPOS=(
     [CMSSpreadsheetMappingProcess]='(
         [newname]="SpreadsheetMappingProcess"
     )'
-    [CurriculumManagementSystemWeb]='(
+    [CMSystemWeb]='(
         [newname]="Web"
     )'
-    [CurriculumManagementSystemBeans]='(
+    [CMSSystemBeans]='(
         [newname]="Beans"
     )'
 )
