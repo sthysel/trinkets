@@ -1,4 +1,8 @@
 def tag(name, *content, **attributes):
+    """
+    >>> tag('h1')
+    '<h1></h1>'
+    """
 
     content_str = ''
     if content:
@@ -8,6 +12,6 @@ def tag(name, *content, **attributes):
 
 
 if __name__ == '__main__':
-    print(tag('h1'))
-    print(tag('h2', 'foo', 'bar'))
+    import doctest
+    doctest.testmod()
 
